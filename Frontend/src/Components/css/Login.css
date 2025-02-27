@@ -1,0 +1,30 @@
+.LoginSection {
+    border : 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkgrey;
+    height: 100vh;
+    width: 100vw;
+
+}
+
+.InputBox {
+
+    background-color: grey;
+    height: 300px;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    border : 5px solid wheat;
+    color : wheat;
+
+}
+
+.Loginlink {
+    text-decoration: none;
+    margin : 10px;
+    color : orange;
+}
