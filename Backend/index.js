@@ -2,11 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const port = 3000;
+const Order = require('./models/loginSchema');
 
 app.use(express.json());
 
 mongoose
-  .connect(MONGODB_URL)
+  .connect("mongodb://127.0.0.1:27017/Order")
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.error("MongoDB Connection Failed:", err));
 

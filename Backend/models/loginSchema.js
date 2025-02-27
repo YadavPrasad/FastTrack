@@ -6,5 +6,5 @@ const orderSchema = mdb.Schema({
     status: String,
   });
   
-const order_schema = mongoose.model('Order', orderSchema);
+const order_schema = mdb.model('Order', orderSchema);
 module.exports = order_schema; 
