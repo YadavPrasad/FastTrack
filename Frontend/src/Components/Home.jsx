@@ -1,11 +1,13 @@
+import './css/Home.css';
+
 const Home = () => {
-    return(
+    return (
         <div>
-            <section>
-                <form>
-                    <label>
-                        
-                    </label>
+            <section className="Home">
+                <form className="Forms">
+                    <h1>Enter Your Order ID Below</h1>
+                    <label htmlFor="orderID"></label>
+                    <input type="text" id="orderID" required />
                 </form>
             </section>
         </div>

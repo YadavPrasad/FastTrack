@@ -1,0 +1,12 @@
+.Home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+.Forms {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
