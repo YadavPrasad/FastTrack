@@ -1,17 +1,27 @@
 import { Link } from "react-router-dom";
+import "./css/Login.css";
 
 function Signup() {
   return (
-    <section>
-      <h1>Signup</h1>
-      <form>
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" required /> <br />
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" required /><br />
-        <button type="submit">Signup</button>
-      </form>
-      <p>Already have an account?<Link to='/login'>Login</Link></p>
+    <section className="LoginSection">
+      <div className="InputBox">
+        <form>
+        <center><h1>SIGN UP</h1></center>
+          <label htmlFor="email">Email:</label> <br />
+          <input type="email" id="email" required /> <br />
+          <label htmlFor="password">Password:</label> <br />
+          <input type="password" id="password" required />
+          <br />
+          <label htmlFor="password">Confirm Password:</label> <br />
+          <input type="password" id="password" required />
+          <br />
+          <button type="submit">Signup</button>
+          <p>
+          Already have an account?<Link to="/Login" className="Loginlink">Login</Link>
+          </p>
+        </form>
+
+      </div>
     </section>
   );
 }
