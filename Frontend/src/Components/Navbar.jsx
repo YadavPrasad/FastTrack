@@ -31,8 +31,8 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-          <img src={logo3} style={{ height: "25px", position : "relative" , top : "1.4px", left: "4px"}} />
-            <Link to="/contact" className="link" style={{position: "relative", bottom : "5px"}}>
+          <img src={logo3} style={{ height: "25px", position : "relative" , top : "1.5px", left: "4px"}} />
+            <Link to="/contact" className="link" style={{position: "relative", bottom : "4.7px"}}>
               Contact us
             </Link>
           </li>
