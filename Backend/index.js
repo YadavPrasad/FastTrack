@@ -1,36 +1,42 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const app = express();
-const port = 3000;
-const Order = require('./models/loginSchema');
+const mdb = require("mongoose");
+const PORT = 3000;
+const Signup = require("./models/UsersSchema");
+const bcrypt = require('bcrypt');
+app.use(express.json())
 
-app.use(express.json());
 
-mongoose
-  .connect("mongodb://127.0.0.1:27017/Order")
-  .then(() => console.log("MongoDB connected successfully"))
-  .catch((err) => console.error("MongoDB Connection Failed:", err));
+mdb.connect("mongodb+srv://yadav:yadav@credentials.dmbcf.mongodb.net/?retryWrites=true&w=majority&appName=Credentials")
+   .then(() => {
+    console.log("mdb Connection Successful");
+   })
+   .catch((err)=> {onsole.log("check your connection string", err);})
 
-  app.post('/track-order', async (req, res) => {
-    const { orderID } = req.body;
-  
-    if (!orderID) {
-      return res.status(400).json({ message: 'OrderID is required.' });
-    }
-  
-    try {
-      const order = await Order.findOne({ orderID });
-  
-      if (!order) {
-        return res.status(404).json({ message: 'Order not found.' });
-      }
-  
-      res.status(200).json({ message: 'Order found!', order });
-    } catch (err) {
-      res.status(500).json({ message: 'Server error', error: err.message });
-    }
-  });
+app.post("/signup", async (req, res) => {
+  try{
+    const {Username, password} = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    const newSignup = new Signup({
+          Username : Username,
+          password : password
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+    })
+
+    await newSignup.save();
+    console.log("Signup successful");
+    res.status(200).json(newSignup);
+
+  }
+  catch(error){
+    console.log(error);
+    res.status(400).json({ message: "unsuccessful", isSignedUp: false });
+  }
 });
+
+
+app.listen(PORT, () => {
+  console.log(`server is running on http://localhost:${PORT}`);
+
+})
