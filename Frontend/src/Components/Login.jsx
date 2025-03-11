@@ -2,6 +2,14 @@ import { Link } from "react-router-dom";
 import "./css/Login.css";
 
 function Login() {
+
+  const checkCredentials = async(e) => {
+    const user = document.getElementById("email");
+    const password = document.getElementById("password");
+  }
+
+
+
   return (
     <section className="LoginSection">
       <div className="InputBox">
