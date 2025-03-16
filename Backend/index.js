@@ -52,19 +52,22 @@ app.post("/login", async(req, res) => {
     if(userDetails) {
       //alert("signup please");
       const storePw = userDetails.password;
-      bcrypt.compare(password, storePw, (err, res) => {
+      bcrypt.compare(password, storePw, (err, result) => {
         if(err) {
           console.log(err);
+          return res.status(403).json({message:"Thevidiya paiya code adika theriyadha da "});
         }
-        if(res) {
+        if(result) {
+          console.log(result);
           console.log("passwords match !!");
+          res.status(400).json({message : "hi"});
         }
         else console.log("passwords doesn't match !!");
       });
-      res.status(200).json({message : "hi"});
+      return res.status(200).json({message : "hi"});
     }
     else{
-      return res.status(200).json({message:"Otha veliya poda poolu..."});
+      return res.status(200).json({message:"Otha veliya poda."});
     }
   }
   catch(err){

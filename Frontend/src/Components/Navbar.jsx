@@ -6,7 +6,7 @@ import logo2 from "../assets/image 2.png";
 import logo3 from "../assets/image 4.png";
 import logo4 from "../assets/image 3.png";
 
-const Navbar = () => {
+const Navbar = ({isloggedIn}) => {
   return (
     <header>
       <nav className="navbar">
@@ -39,7 +39,7 @@ const Navbar = () => {
           <li>
           <img src={logo4} style={{ height: "20px", position : "relative" , top : "3.6px", right : "1.2px"}} />
             <Link to="/login" className="link">
-              Login
+              {isloggedIn == true ? "Logout" : "Login"}
             </Link>
           </li>
         </ul>

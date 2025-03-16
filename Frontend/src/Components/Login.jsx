@@ -1,11 +1,25 @@
 import { Link } from "react-router-dom";
 import "./css/Login.css";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
-function Login() {
-
+function Login({setIsLoggedIn}) {
+  const navigate = useNavigate();
   const checkCredentials = async(e) => {
+    e.preventDefault();
     const user = document.getElementById("email");
     const password = document.getElementById("password");
+
+    await axios 
+    .post("http://localhost:3002/login", {
+      Username : user.value,
+      password : password.value
+    })
+    .then((res) => {
+      setIsLoggedIn(true);
+      navigate("/");
+    })
+    .catch((err) => {console.log(err);})
   }
 
 
@@ -13,7 +27,8 @@ function Login() {
   return (
     <section className="LoginSection">
       <div className="InputBox">
-        <form>
+
+        <form onSubmit={checkCredentials}>
         <center><h1>LOGIN</h1></center>
           <label htmlFor="email">Email:</label> <br />
           <input type="email" id="email" required /> <br />

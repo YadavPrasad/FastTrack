@@ -56,3 +56,37 @@ body {
     color: white;
 }
 
+.user-menu {
+    position: relative;
+  }
+  
+  .user-greeting {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .logout-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #333;
+    padding: 10px;
+    border-radius: 4px;
+    min-width: 120px;
+    z-index: 1000;
+  }
+  
+  .logout-dropdown button {
+    background: none;
+    border: none;
+    color: orange;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    padding: 5px;
+  }
+  
+  .logout-dropdown button:hover {
+    color: white;
+  }

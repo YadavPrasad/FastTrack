@@ -8,6 +8,7 @@ function Signup() {
   
     const navigate = useNavigate();
     const [pwdVisibility, setpwdVisibility] = useState(false);
+
     const sendSignup = async(e) => {
 
 
@@ -23,7 +24,7 @@ function Signup() {
       }
 
       await axios
-        .post("http://localhost:3000/signup", {
+        .post("http://localhost:3002/signup", {
           Username : user.value,
           password : pass.value,
         })
@@ -40,7 +41,7 @@ function Signup() {
         <form onSubmit={sendSignup}>
         <center><h1>SIGN UP</h1></center>
           <label htmlFor="email">Email:</label> <br />
-          <input type="email" id="email" required /> <br />
+          <input type="email" id="email" required  /> <br />
           <label htmlFor="password">Password:</label> <br />
           <input type={pwdVisibility ?  "text" : "password"} id="password" required />
           <br />
