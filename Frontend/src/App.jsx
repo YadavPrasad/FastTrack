@@ -25,7 +25,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />} />
-          <Route path="/order/:orderID" element={<Order />} />  
+          <Route path="/order/:orderID" element={<Order isLoggedIn={isLoggedIn} username={username} />} />  
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>

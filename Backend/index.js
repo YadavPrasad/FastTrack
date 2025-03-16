@@ -73,11 +73,16 @@ app.get("/orders/:username", async (req, res) => {
 
 app.get("/order/:orderID", async (req, res) => {
   try {
-    const order = await Order.findOne({ orderID: req.params.orderID });
+    const { username } = req.query;
+    if (!username) {
+      return res.status(401).json({ message: "Unauthorized: No username provided" });
+    }
+
+    const order = await Order.findOne({ orderID: req.params.orderID, username });
     if (order) {
       res.json(order);
     } else {
-      res.status(404).json({ message: "Order not found" });
+      res.status(403).json({ message: "Order not found or unauthorized" });
     }
   } catch (error) {
     res.status(400).json({ message: "Error fetching order" });

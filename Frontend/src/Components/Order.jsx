@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import axios from 'axios';
 import { Icon } from 'leaflet';
 
-const Order = () => {
+const Order = ({ isLoggedIn, username }) => {
   const { orderID } = useParams();
+  const navigate = useNavigate();
   const [orderData, setOrderData] = useState(null);
   
-  // Create custom icons that don't rely on local assets
   const customIcon = new Icon({
     iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
     shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
@@ -20,10 +20,22 @@ const Order = () => {
   });
 
   useEffect(() => {
-    axios.get(`https://fasttrack-1cl0.onrender.com/order/${orderID}`)
-      .then(response => setOrderData(response.data))
+    if (!isLoggedIn) {
+      navigate("/login"); // Redirect to login if not logged in
+      return;
+    }
+
+    axios.get(`https://fasttrack-1cl0.onrender.com/order/${orderID}?username=${username}`)
+      .then(response => {
+        if (response.data.username !== username) {
+          alert("Unauthorized access! This order does not belong to you.");
+          navigate("/"); // Redirect home if the order doesn't belong to the user
+        } else {
+          setOrderData(response.data);
+        }
+      })
       .catch(error => console.error("Error fetching order:", error));
-  }, [orderID]);
+  }, [isLoggedIn, username, orderID, navigate]);
 
   return (
     <div>
@@ -47,7 +59,7 @@ const Order = () => {
           </MapContainer>
         </>
       ) : (
-        <p>Order ID doesn't exist.</p>
+        <p>Order ID doesn't exist or you are not authorized to view this order.</p>
       )}
     </div>
   );
