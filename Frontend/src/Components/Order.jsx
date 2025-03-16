@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import axios from 'axios';
 
 const Order = () => {
-  const { orderID } = useParams(); 
+  const { orderID } = useParams();
   const [orderData, setOrderData] = useState(null);
 
   useEffect(() => {
@@ -21,18 +21,24 @@ const Order = () => {
         <>
           <h2>Order ID: {orderData.orderID}</h2>
           <h3>Status: {orderData.status}</h3>
-          <MapContainer center={[orderData.currentLocation.lat, orderData.currentLocation.lng]} zoom={13} style={{ height: '400px' }}>
+          <MapContainer center={[orderData.currentLocation.lat, orderData.currentLocation.lng]} zoom={5} style={{ height: '400px' }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            
+            {/* Current Location Marker */}
             <Marker position={[orderData.currentLocation.lat, orderData.currentLocation.lng]}>
               <Popup>Current Location</Popup>
             </Marker>
-            <Marker position={[orderData.destination.lat, orderData.destination.lng]}>
-              <Popup>Destination</Popup>
-            </Marker>
+
+            {/* Destination Marker */}
+            {orderData.destination && orderData.destination.lat && orderData.destination.lng && (
+              <Marker position={[orderData.destination.lat, orderData.destination.lng]}>
+                <Popup>Destination</Popup>
+              </Marker>
+            )}
           </MapContainer>
         </>
       ) : (
-        <p>Loading order details...</p>
+        <p>Order ID doesn't exists.</p>
       )}
     </div>
   );
