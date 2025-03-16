@@ -9,7 +9,7 @@ const Order = () => {
   const [orderData, setOrderData] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3002/order/${orderID}`)
+    axios.get(`https://fasttrack-1cl0.onrender.com/order/${orderID}`)
       .then(response => setOrderData(response.data))
       .catch(error => console.error("Error fetching order:", error));
   }, [orderID]);
@@ -24,12 +24,10 @@ const Order = () => {
           <MapContainer center={[orderData.currentLocation.lat, orderData.currentLocation.lng]} zoom={5} style={{ height: '400px' }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             
-            {/* Current Location Marker */}
             <Marker position={[orderData.currentLocation.lat, orderData.currentLocation.lng]}>
               <Popup>Current Location</Popup>
             </Marker>
 
-            {/* Destination Marker */}
             {orderData.destination && orderData.destination.lat && orderData.destination.lng && (
               <Marker position={[orderData.destination.lat, orderData.destination.lng]}>
                 <Popup>Destination</Popup>

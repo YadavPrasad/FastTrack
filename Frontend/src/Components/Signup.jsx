@@ -24,7 +24,7 @@ function Signup() {
       }
 
       await axios
-        .post("http://localhost:3002/signup", {
+        .post("https://fasttrack-1cl0.onrender.com/signup", {
           Username : user.value,
           password : pass.value,
         })

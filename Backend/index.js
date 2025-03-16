@@ -11,13 +11,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://yadav:yadav@credential.25wb3.mongodb.net/Credential?retryWrites=true&w=majority&appName=Credential")
+mongoose.connect(process.env.MONGODB_URL)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
-const PORT = 3002;
+const PORT =  process.env.PORT;
 
-// **Signup Route**
 app.post("/signup", async (req, res) => {
   try {
     const { Username, password } = req.body;
@@ -37,7 +36,6 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-// **Login Route**
 app.post("/login", async (req, res) => {
   try {
     const { Username, password } = req.body;
@@ -54,7 +52,6 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// **Create Order**
 app.post("/order", async (req, res) => {
   try {
     const newOrder = new Order(req.body);
@@ -65,7 +62,6 @@ app.post("/order", async (req, res) => {
   }
 });
 
-// **Get User Orders**
 app.get("/orders/:username", async (req, res) => {
   try {
     const orders = await Order.find({ username: req.params.username });
@@ -75,7 +71,6 @@ app.get("/orders/:username", async (req, res) => {
   }
 });
 
-// **Get Order Tracking Details**
 app.get("/order/:orderID", async (req, res) => {
   try {
     const order = await Order.findOne({ orderID: req.params.orderID });
@@ -89,5 +84,4 @@ app.get("/order/:orderID", async (req, res) => {
   }
 });
 
-// **Start Server**
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -8,7 +8,7 @@ const Home = () => {
 
   const handleTrackOrder = () => {
     if (orderID.trim() !== "") {
-      navigate(`/order/${orderID}`);  // Redirect to My Orders with order ID
+      navigate(`/order/${orderID}`);  
     }
   };
 

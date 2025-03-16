@@ -11,7 +11,7 @@ function Login({ setIsLoggedIn, setUsername }) {
   const checkCredentials = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3002/login", { Username: email, password });
+      const res = await axios.post("https://fasttrack-1cl0.onrender.com/login", { Username: email, password });
       if (res.status === 200) {
         setIsLoggedIn(true);
         setUsername(email);
