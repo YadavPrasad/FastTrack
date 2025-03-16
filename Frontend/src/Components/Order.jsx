@@ -4,25 +4,20 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import axios from 'axios';
 import { Icon } from 'leaflet';
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-
-delete Icon.Default.prototype._getIconUrl;
-
-Icon.Default.mergeOptions({
-  iconUrl: markerIcon,
-  shadowUrl: markerShadow,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
-
-
 
 const Order = () => {
   const { orderID } = useParams();
   const [orderData, setOrderData] = useState(null);
+  
+  // Create custom icons that don't rely on local assets
+  const customIcon = new Icon({
+    iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
 
   useEffect(() => {
     axios.get(`https://fasttrack-1cl0.onrender.com/order/${orderID}`)
@@ -40,19 +35,19 @@ const Order = () => {
           <MapContainer center={[orderData.currentLocation.lat, orderData.currentLocation.lng]} zoom={5} style={{ height: '400px' }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             
-            <Marker position={[orderData.currentLocation.lat, orderData.currentLocation.lng]}>
+            <Marker position={[orderData.currentLocation.lat, orderData.currentLocation.lng]} icon={customIcon}>
               <Popup>Current Location</Popup>
             </Marker>
 
             {orderData.destination && orderData.destination.lat && orderData.destination.lng && (
-              <Marker position={[orderData.destination.lat, orderData.destination.lng]}>
+              <Marker position={[orderData.destination.lat, orderData.destination.lng]} icon={customIcon}>
                 <Popup>Destination</Popup>
               </Marker>
             )}
           </MapContainer>
         </>
       ) : (
-        <p>Order ID doesn't exists.</p>
+        <p>Order ID doesn't exist.</p>
       )}
     </div>
   );
