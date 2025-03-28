@@ -14,10 +14,10 @@ const Home = () => {
 
   return (
     <div>
-      <center><h1 className="Header">Track Your Orders with Ease</h1></center>
+      <center><h1 className="Header">Track Your Location with Ease</h1></center>
       <section className="Home">
         <div className="Forms">
-          <h1>Enter Your Order ID Below</h1>
+          <h1>Enter</h1>
           <input 
             type="text" 
             placeholder="Enter Order ID" 

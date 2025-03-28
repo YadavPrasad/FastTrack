@@ -23,7 +23,7 @@ const Navbar = ({ isLoggedIn, username, handleLogout }) => {
           </li>
           <li>
             <img src={logo2} style={{ height: "20px", position: "relative", top: "3.6px" }} />
-            <Link to="/order" className="link">My Orders</Link>
+            <Link to="/order" className="link">GPS Track</Link>
           </li>
           <li>
             <img src={logo3} style={{ height: "25px", position: "relative", top: "1.5px", right: "3px" }} />

@@ -21,7 +21,7 @@ const Order = ({ isLoggedIn, username }) => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate("/login"); // Redirect to login if not logged in
+      navigate("/login"); 
       return;
     }
 
@@ -29,7 +29,7 @@ const Order = ({ isLoggedIn, username }) => {
       .then(response => {
         if (response.data.username !== username) {
           alert("Unauthorized access! This order does not belong to you.");
-          navigate("/"); // Redirect home if the order doesn't belong to the user
+          navigate("/"); 
         } else {
           setOrderData(response.data);
         }

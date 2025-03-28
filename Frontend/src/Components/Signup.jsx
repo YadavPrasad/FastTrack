@@ -12,7 +12,7 @@ function Signup() {
     const sendSignup = async(e) => {
 
 
-      e.preventDefault() //Prevents page reload
+      e.preventDefault() 
 
       const user = document.getElementById("email");
       const pass = document.getElementById("password");
