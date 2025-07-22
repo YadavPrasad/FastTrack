@@ -34,7 +34,7 @@ function Login({ setIsLoggedIn, setUsername }) {
           <br />
           <button type="submit">Login</button>
           <p>Create an account? <Link to="/signup" className="Loginlink"> Signup</Link></p>
-        </form>
+        </form>        
       </div>
     </section>
   );
